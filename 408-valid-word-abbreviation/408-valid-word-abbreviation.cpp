@@ -16,17 +16,13 @@ public:
                 num = num * 10 + abbr[i] - '0';
                 
                 if (i == strlen(abbr.c_str()) - 1) {
-                    for (int j = 0; j < num; j++) {
-                        w++;
-                    }
+                    w += num;
                 }
                 
                 
             } else {
                 if (num != 0) {
-                    for (int j = 0; j < num; j++) {
-                        w++;
-                    }
+                    w += num;
                     num = 0;
                 }
                 
