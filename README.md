@@ -3,7 +3,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 
 ## FaceBook
 
-**129-sum-root-to-leaf-numbers**        $$$
+**129-sum-root-to-leaf-numbers**        $$$   DFS
 
 346-moving-average-from-data-stream
 
