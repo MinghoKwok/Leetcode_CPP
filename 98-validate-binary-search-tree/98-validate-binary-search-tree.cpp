@@ -10,25 +10,20 @@
  * };
  */
 class Solution {
-    TreeNode* prev = nullptr;
+
 public:
     bool isValidBST(TreeNode* root) { 
-        return inorder(root);
+        return divide(root, LONG_MIN, LONG_MAX);
     }
     
-    bool inorder(TreeNode* root) {
-        if (root == NULL) {
+    bool divide(TreeNode* root, long MIN, long MAX) {
+        if (root == NULL)
             return true;
-        } 
         
-        if (!inorder(root->left))
+        if (root->val <= MIN || root->val >= MAX)
             return false;
         
-        if (prev != nullptr && root->val <= prev->val)
-            return false;
-        
-        prev = root;
-        return inorder(root->right);
+        return divide(root->left, MIN, root->val) && divide(root->right, root->val, MAX);
     }
 
 };
