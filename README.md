@@ -11,3 +11,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 
 766-toeplitz-matrix
 
+
+## 周赛
+
+**2305. Fair Distribution of Cookies** $$$$  BackTrack Pruning  https://leetcode.com/submissions/detail/720916155/
