@@ -14,4 +14,5 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 
 ## 周赛
 
-**2305. Fair Distribution of Cookies** $$$$  BackTrack Pruning  https://leetcode.com/submissions/detail/720916155/
+**2305. Fair Distribution of Cookies** $$$$  
+BackTrack Pruning  https://leetcode.com/submissions/detail/720916155/
