@@ -2,7 +2,7 @@ class Solution {
     vector<vector<int>> res;
 public:
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<int> cur;
+        vector<int> cur(nums.size(), 11);
         
         backtrack(nums, cur, nums.size());
         
@@ -15,13 +15,13 @@ public:
             return;
         }
         
-        for (int i = 0; i < nums.size(); i++) {
-            int val = nums[i];
-            cur.push_back(val);
-            nums.erase(nums.begin() + i);
-            backtrack(nums, cur, size - 1);
-            cur.pop_back();
-            nums.insert(nums.begin() + i, val);
+        int val = nums[nums.size() - size];
+        for (int i = 0; i < cur.size(); i++) {
+            if (cur[i] == 11) {
+                cur[i] = val;
+                backtrack(nums, cur, size - 1);
+                cur[i] = 11;
+            }
         }
     }
 };
