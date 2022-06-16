@@ -9,7 +9,7 @@ public:
         
         sort(candidates.rbegin(), candidates.rend());
         vector<int> cur_vec;
-        vector<bool> status(candidates.size(), false);
+        vector<bool> status(candidates.size(), false);  // record if eash element of candidates is used or not, to pruning
         backtrack(candidates, target, 0, cur_vec, status);
         
         
@@ -36,7 +36,7 @@ public:
         
         
         cur.push_back(cand[index]);
-        if (index != 0 && cand[index] == cand[index - 1] && status[index - 1] == false) {
+        if (index != 0 && cand[index] == cand[index - 1] && status[index - 1] == false) {   // pruning
             
         } else {
             status[index] = true;
