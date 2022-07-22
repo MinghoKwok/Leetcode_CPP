@@ -3,38 +3,34 @@ public:
     int minimumKeypresses(string s) {
         int res = 0;
         
-        map<char, int> cnt; // char in s -> count
+        vector<int> cnt(26, 0);
         for (int i = 0; i < s.size(); i++) {
-            cnt[s[i]]++;
+            cnt[s[i] - 'a']++;
         }
         
-        vector<pair<char, int>> vec_cnt;
-        for (auto iter = cnt.begin(); iter != cnt.end(); iter++) {
-            //cout << iter->first << " " << iter->second << endl;
-            vec_cnt.push_back(pair<char, int>(iter->first, iter->second));
-        }
+        sort(cnt.rbegin(), cnt.rend());
         
-        sort(vec_cnt.rbegin(), vec_cnt.rend(), cmp);
-        int cnt_1 = 9; // press one time
+        int cnt_1 = 9;
         int cnt_2 = 9;
         
-        for (int i = 0; i < vec_cnt.size(); i++) {
+        for (int i = 0; i < cnt.size(); i++) {
+            if (cnt[i] == 0)
+                break;
+            
             if (cnt_1 > 0) {
-                res += vec_cnt[i].second;
+                res += cnt[i];
                 cnt_1--;
             } else if (cnt_2 > 0) {
-                res += 2 * vec_cnt[i].second;
+                res += cnt[i] * 2;
                 cnt_2--;
             } else {
-                res += 3 * vec_cnt[i].second;
+                res += cnt[i] * 3;
             }
+            
         }
         
         return res;
+    }
         
-    }
-    
-    int static cmp(const pair<char, int>& p1, const pair<char, int>& p2) {
-        return p1.second < p2.second;
-    }
+        
 };
