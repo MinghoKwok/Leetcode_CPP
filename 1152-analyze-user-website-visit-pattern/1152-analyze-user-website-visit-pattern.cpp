@@ -10,7 +10,7 @@ public:
         }
         
         for (auto it_mp = mp.begin(); it_mp != mp.end(); it_mp++) {
-            set<string> cur_user;
+            set<string> cur_user; // what patterns this user has
             for (auto it1 = it_mp->second.begin(); it1 != it_mp->second.end(); it1++) {
                 for (auto it2 = next(it1); it2 != it_mp->second.end(); it2++) {
                     for (auto it3 = next(it2); it3 != it_mp->second.end(); it3++) {
@@ -26,6 +26,7 @@ public:
         }
         
         
+        // find largest value and corresponding res_str
         string res_str;
         int max_cnt = -1;
         for (auto it = cnt.begin(); it != cnt.end(); it++) {
@@ -39,6 +40,7 @@ public:
                 continue;
             }
         }
+        // decode the res_str
         int pos1 = res_str.find('$');
         int pos2 = res_str.find('@');
         res.push_back(res_str.substr(0, pos1));
