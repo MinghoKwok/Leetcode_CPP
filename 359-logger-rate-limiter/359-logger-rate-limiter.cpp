@@ -1,6 +1,6 @@
 class Logger {
 private:
-    unordered_map<string, int> mp; // msg->time
+    map<string, int> mp; // msg->time
     
 public:
     Logger() {
