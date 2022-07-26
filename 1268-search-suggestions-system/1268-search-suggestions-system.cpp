@@ -1,35 +1,67 @@
 class Solution {
+    /*
+    1. clarification
+        constraints:
+            products.length [1, 1000]
+            products[i].length  <= 3000
+            1 <= searchWord.length <= 1000
+    
+    2. Example
+    
+    3. Solution 
+    a. assumption
+        return null vector when no result
+    
+    b. input/output
+        input: string array, string
+    
+    c. corner case:
+        too many 
+    
+    d. algo:
+        two pointers
+    
+    e. Complexity
+        Time: nlogn
+        Space:
+    
+    */
+    
 public:
     vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
         vector<vector<string>> res;
         sort(products.begin(), products.end());
-        //string cur_srch = "";
-        int len = searchWord.size();
-        int left = 0;
-        int right = products.size() - 1;
+        int pos = 0;
+        int l = 0;
+        int r = products.size() - 1;
         
-        for (int i = 0; i < len; i++) {
-            char c = searchWord[i];
-            while (left < right && products[left][i] != c) {
-                left++;
-            }
-            while (left <= right && products[right][i] != c) {
-                right--;
+        while (pos < searchWord.size()) {
+            char cur = searchWord[pos];
+            while (l < r && products[l][pos] != cur) {
+                l++;
+                if (l >= products.size())
+                    break;
+            } 
+            while (l <= r && products[r][pos] != cur) {
+                r--;
+                if (r < 0)
+                    break;
             }
             
             vector<string> vec;
-            //cout << left << endl;
-            for (int j = left; j < left + 3; j++) {
-                if (j > right)
-                    break;
+            if (l <= r) {
+                for (int i = l; i <= r && i - l <= 2; i++) {
+                    vec.push_back(products[i]);
+                }
+            } else {
                 
-                vec.push_back(products[j]);
             }
             res.push_back(vec);
+            
+            pos++;
         }
         
         
-    
         return res;
     }
 };
