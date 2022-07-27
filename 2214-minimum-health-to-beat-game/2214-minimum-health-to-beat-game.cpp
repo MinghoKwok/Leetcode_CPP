@@ -8,12 +8,10 @@ class Solution {
 public:
     long long minimumHealth(vector<int>& damage, int armor) {
         long long res = 0;
-        long long sum = 0;
+        long long sum = accumulate(damage.begin(), damage.end(), 0L);
         int max_dmg = 0;
         for (int i = 0; i < damage.size(); i++) {
-            sum += damage[i];
-            if (damage[i] > max_dmg)
-                max_dmg = damage[i];
+            max_dmg = max(max_dmg, damage[i]);
         }
         
         if (max_dmg > armor) {
