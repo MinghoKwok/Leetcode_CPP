@@ -1,10 +1,11 @@
 class RandomizedSet {
 private:
-    map<int, bool> mp;
+    unordered_map<int, bool> mp;
     
 public:
     RandomizedSet() {
         mp.erase(mp.begin(), mp.end());
+        
     }
     
     bool insert(int val) {
