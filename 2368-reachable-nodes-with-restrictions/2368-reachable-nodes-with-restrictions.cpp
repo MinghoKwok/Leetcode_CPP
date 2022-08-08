@@ -1,5 +1,5 @@
 class Solution {
-    unordered_set<int> set_res;
+    //unordered_set<int> set_res;
     unordered_set<int> visited;
     vector<vector<int>> vec_edges;
 public:
@@ -13,24 +13,24 @@ public:
         }
         
         // Transfer restricted vector to set
-        // for (int i = 0; i < restricted.size(); i++) {
-        //     set_res.insert(restricted[i]);
-        // }
-        set_res = unordered_set<int>(restricted.begin(), restricted.end());
+        for (int i = 0; i < restricted.size(); i++) {
+            visited.insert(restricted[i]);  // 直接加入 visited 即可，后面可以少一个判断
+        }
+        //set_res = unordered_set<int>(restricted.begin(), restricted.end());
         
         // dfs
         dfs(0);
         
         
         
-        return visited.size();
+        return visited.size() - restricted.size();
     }
     
     void dfs(int num) {
         visited.insert(num);
         for (int i = 0; i < vec_edges[num].size(); i++) {
             int next = vec_edges[num][i];
-            if (visited.find(next) == visited.end() && set_res.find(next) == set_res.end()) {
+            if (visited.find(next) == visited.end()) {
                 dfs(next);
             }
         }
