@@ -4,7 +4,6 @@ class Solution {
     vector<vector<int>> vec_edges;
 public:
     int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
-        sort(edges.begin(), edges.end());
         vec_edges.resize(n);
         
         // construct graph
