@@ -18,10 +18,14 @@ public:
             advance(it, 1);
             
         }
-        //cout << newInterval[0] << " " << newInterval[1];
         
-        res.push_back(newInterval);
-        sort(res.begin(), res.end());
+        //res.push_back(newInterval);
+        
+        int pos = 0;
+        while (pos < res.size() && res[pos][0] < newInterval[0]) {
+            pos++;
+        }
+        res.insert(res.begin() + pos, newInterval);
         
         return res;
     }
