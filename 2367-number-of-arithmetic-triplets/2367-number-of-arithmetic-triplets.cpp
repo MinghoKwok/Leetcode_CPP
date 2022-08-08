@@ -1,18 +1,13 @@
-class Solution {
+class Solution {    
+    //https://leetcode.com/problems/number-of-arithmetic-triplets/discuss/2390637/Check-n-diff-and-n-2-*-diff
 public:
     int arithmeticTriplets(vector<int>& nums, int diff) {
-        int res = 0;
-        vector<bool> num_exist(251);
-        for (int i = 0; i < nums.size(); i++) {
-            num_exist[nums[i]] = true;
+        int cnt[201] = {}, res = 0;
+        for (auto n : nums) {
+            if (n >= 2 * diff)
+                res += cnt[n - diff] && cnt[n - 2 * diff];
+            cnt[n] = true;
         }
-        
-        for (int i = 0; i < nums.size(); i++) {
-            if (num_exist[nums[i] + diff] && num_exist[nums[i] + diff + diff]) {
-                res++;
-            }
-        }
-        
         return res;
     }
 };
