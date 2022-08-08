@@ -3,6 +3,7 @@ public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
         vector<vector<int>> res;
         auto it = intervals.begin();
+        bool inserted = false;
         while (it != intervals.end()) {
             // cout << (*it)[0] << " " << (*it)[1] << endl;
             // cout << newInterval[0] << " " << newInterval[1] << endl << endl;
@@ -12,6 +13,10 @@ public:
                 newInterval[1] = max(newInterval[1], (*it)[1]);
                 
             } else {
+                if (newInterval[1] < (*it)[0] && !inserted) {
+                    res.push_back(newInterval);
+                    inserted = true;
+                }
                 res.push_back(*it);
             }
             
@@ -19,13 +24,14 @@ public:
             
         }
         
-        //res.push_back(newInterval);
+        if (!inserted)
+            res.push_back(newInterval);
         
-        int pos = 0;
-        while (pos < res.size() && res[pos][0] < newInterval[0]) {
-            pos++;
-        }
-        res.insert(res.begin() + pos, newInterval);
+        // int pos = 0;
+        // while (pos < res.size() && res[pos][0] < newInterval[0]) {
+        //     pos++;
+        // }
+        // res.insert(res.begin() + pos, newInterval);
         
         return res;
     }
