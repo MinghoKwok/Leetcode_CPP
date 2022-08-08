@@ -1,42 +1,35 @@
-class Solution {
-    //unordered_set<int> set_res;
-    vector<bool> visited;
-    vector<vector<int>> vec_edges;
-    int cnt = 0;
-public:
-    int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
-        vec_edges.resize(n);
-        visited.resize(n);
-        
-        // construct graph
-        for (int i = 0; i < edges.size(); i++) {
-            vec_edges[edges[i][0]].push_back(edges[i][1]);
-            vec_edges[edges[i][1]].push_back(edges[i][0]);
-        }
-        
-        // Transfer restricted vector to set
-        for (int i = 0; i < restricted.size(); i++) {
-            visited[restricted[i]] = true;  // 直接加入 visited 即可，后面可以少一个判断
-        }
-        //set_res = unordered_set<int>(restricted.begin(), restricted.end());
-        
-        // dfs
-        dfs(0);
-        
-        
-        
-        return cnt;
-    }
+class Solution{      
+// https://leetcode.com/problems/reachable-nodes-with-restrictions/discuss/2390929/C%2B%2B-oror-SIMPLE-DFS-oror-DETAILED-EXPLAINATION-oror-MARKING-RESTRICTED-NODES-AS-VISITED-BEFORE-DFS
     
-    void dfs(int num) {
-        visited[num] = true;
-        cnt++;
-        for (int i = 0; i < vec_edges[num].size(); i++) {
-            int next = vec_edges[num][i];
-            if (!visited[next]) {
-                dfs(next);
+public:
+    void dfs(int u, vector<int> adj[], int &cnt, vector<bool> &vis)
+    {
+        vis[u] = true;
+        // if we reach a new node, while performing dfs, we increase our count by 1
+        cnt++; 
+        for (auto v : adj[u])
+        {
+            if (vis[v] == false)
+            {
+                dfs(v, adj, cnt, vis);
             }
         }
     }
+    int reachableNodes(int n, vector<vector<int>> &edges, vector<int> &restricted)
+    {
+        vector<bool> visited(n, false);
+        vector<int> adj[n]; // adjency list
+        for (int i = 0; i < edges.size(); i++)
+        {
+            adj[edges[i][0]].push_back(edges[i][1]);
+            adj[edges[i][1]].push_back(edges[i][0]);
+        }
+        for (auto a : restricted)
+        {
+            visited[a] = true; // marking the restricted nodes  as visited.
+        }
+        int count = 0;
+        dfs(0, adj, count, visited);
+        return count;
+    }
 };
-
