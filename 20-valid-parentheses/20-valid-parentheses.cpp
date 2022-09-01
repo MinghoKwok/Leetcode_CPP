@@ -1,12 +1,12 @@
 class Solution {
 public:
     bool isValid(string s) {
-        list<char> stack;
+        stack<char> stack;
         bool res = true;
         
         for (char c : s) {
             if (c == '(' || c == '[' || c == '{') {
-                stack.push_back(c);
+                stack.push(c);
             } else {
                 if (stack.empty()) {
                     res = false;
@@ -15,24 +15,24 @@ public:
                 
                 switch (c) {
                     case ')' :
-                        if (stack.back() == '(')
-                            stack.pop_back();
+                        if (stack.top() == '(')
+                            stack.pop();
                         else 
                             res = false;
                         
                         break;
                         
                     case ']' :
-                        if (stack.back() == '[')
-                            stack.pop_back();
+                        if (stack.top() == '[')
+                            stack.pop();
                         else 
                             res = false;
                         
                         break;
                         
                     case '}' :
-                        if (stack.back() == '{')
-                            stack.pop_back();
+                        if (stack.top() == '{')
+                            stack.pop();
                         else 
                             res = false;
                         
