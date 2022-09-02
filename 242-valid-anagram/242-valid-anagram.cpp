@@ -1,19 +1,15 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        vector<int> cnt(26, 0);
-        for (char c : s) {
-            cnt[c - 'a']++;
-        }
-        for (char c : t) {
-            cnt[c - 'a']--;
-        }
+        vector<char> s_vec;
+        vector<char> t_vec;
         
-        for (int i : cnt) {
-            if (i != 0)
-                return false;
-        }
+        s_vec.assign(s.begin(), s.end());
+        t_vec.assign(t.begin(), t.end());
         
-        return true;
+        sort(s_vec.begin(), s_vec.end());
+        sort(t_vec.begin(), t_vec.end());
+        
+        return s_vec == t_vec;
     }
 };
